@@ -18,11 +18,30 @@ let drawCanvas = () => {
   svg.attr("height", height);
 };
 
-let generateScales = () => {};
+let generateScales = () => {
+  xScale = d3.scaleLinear().range([padding, width - padding]);
+
+  yScale = d3.scaleTime().range([padding, height - padding]);
+};
 
 let drawPoints = () => {};
 
-let generateAxes = () => {};
+let generateAxes = () => {
+  let xAxis = d3.axisBottom(xScale);
+  let yAxis = d3.axisLeft(yScale);
+
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr("id", "x-axis")
+    .attr("transform", "translate(0, " + (height - padding) + ")");
+
+  svg
+    .append("g")
+    .call(yAxis)
+    .attr("id", "y-axis")
+    .attr("transform", "translate(" + padding + ",0)");
+};
 
 req.open("GET", url, true);
 req.onload = () => {
