@@ -24,10 +24,10 @@ let generateScales = () => {
     .domain([
       d3.min(values, (item) => {
         return item["Year"];
-      }),
+      }) - 1,
       d3.max(values, (item) => {
         return item["Year"];
-      }),
+      }) + 1,
     ])
     .range([padding, width - padding]);
 
@@ -63,6 +63,13 @@ let drawPoints = () => {
     })
     .attr("cy", (item) => {
       return yScale(new Date(item["Seconds"] * 1000));
+    })
+    .attr("fill", (item) => {
+      if (item["Doping"] !== "") {
+        return "orange";
+      } else {
+        return "green";
+      }
     });
 };
 
