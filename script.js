@@ -24,7 +24,21 @@ let generateScales = () => {
   yScale = d3.scaleTime().range([padding, height - padding]);
 };
 
-let drawPoints = () => {};
+let drawPoints = () => {
+  svg
+    .selectAll("circle")
+    .data(values)
+    .enter()
+    .append("circle")
+    .attr("class", "dot")
+    .attr("r", "5")
+    .attr("data-xvalue", (item) => {
+      return item["Year"];
+    })
+    .attr("data-yvalue", (item) => {
+      return new Date(item["Seconds"] * 1000);
+    });
+};
 
 let generateAxes = () => {
   let xAxis = d3.axisBottom(xScale);
