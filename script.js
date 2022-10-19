@@ -12,6 +12,7 @@ let height = 600;
 let padding = 40;
 
 let svg = d3.select("svg");
+let tooltip = d3.select("#tooltip");
 
 let drawCanvas = () => {
   svg.attr("width", width);
@@ -70,6 +71,28 @@ let drawPoints = () => {
       } else {
         return "green";
       }
+    })
+    .on("mouseover", (item) => {
+      tooltip.transition().style("visibility", "visible");
+      if (item["Doping"] !== "") {
+        tooltip.text(
+          item["Year"] +
+            " - " +
+            item["Name"] +
+            " - " +
+            item["Time"] +
+            " - " +
+            item["Doping"]
+        );
+      } else {
+        tooltip.text(
+          item["Year"] + " - " + item["Name"] + " - " + item["Time"]
+        );
+      }
+      tooltip.attr("data-year", item["Year"]);
+    })
+    .on("mouseout", (item) => {
+      tooltip.transition().style("visibility", "hidden");
     });
 };
 
