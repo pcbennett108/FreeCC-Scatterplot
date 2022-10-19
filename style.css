@@ -1,0 +1,17 @@
+body {
+  background-color: #4b4453;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+svg {
+  background-color: #d6cae2;
+}
+
+#title {
+  font-size: 24px;
+  fill: #4b4453;
+}
